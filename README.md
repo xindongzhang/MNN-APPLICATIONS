@@ -16,7 +16,7 @@ object_detection/export_tflite_ssd_graph.py  \
 bazel run --config=opt tensorflow/lite/toco:toco -- \
 --input_file=$OUTPUT_DIR/tflite_graph.pb            \
 --output_file=$OUTPUT_DIR/detect.tflite             \
---input_shapes=1,300,300,3                          \
+--input_shapes=1,224,224,3                          \
 --input_arrays=normalized_input_image_tensor        \
 --output_arrays='concat','concat_1'                 \
 --inference_type=FLOAT                              \
