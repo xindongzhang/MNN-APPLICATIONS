@@ -61,7 +61,7 @@ cd /data/local/tmp
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp
 ```
 
-then, in /data/local/tmp, run the executable files **mssd**
+then, in /data/local/tmp, run the executable file **mssd**
 
 ``` 
 ./mssd
