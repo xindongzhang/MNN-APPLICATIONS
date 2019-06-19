@@ -47,6 +47,7 @@ In order to test it, we push them to the android devices. For example, here we s
 ``` 
 adb push ../libs/arm64-v8a/* /data/local/tmp
 adb push image.jpg /data/local/tmp
+adb push face_det.mnn /data/local/tmp
 ```
 
 Then we need to set up the enviroment for testing in android devices, like
