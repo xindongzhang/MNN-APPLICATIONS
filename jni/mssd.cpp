@@ -87,10 +87,10 @@ int main(void)
     cv::Rect biggest_face;
     for(int i = 0; i < OUTPUT_NUM; ++i)
     {
-        float ycenter =     boxes_dataPtr[i + 0 * 1014] / Y_SCALE  * anchors[2][i] + anchors[0][i];
-        float xcenter =     boxes_dataPtr[i + 1 * 1014] / X_SCALE  * anchors[3][i] + anchors[1][i];
-        float h       = exp(boxes_dataPtr[i + 2 * 1014] / H_SCALE) * anchors[2][i];
-        float w       = exp(boxes_dataPtr[i + 3 * 1014] / W_SCALE) * anchors[3][i];
+        float ycenter =     boxes_dataPtr[i + 0 * OUTPUT_NUM] / Y_SCALE  * anchors[2][i] + anchors[0][i];
+        float xcenter =     boxes_dataPtr[i + 1 * OUTPUT_NUM] / X_SCALE  * anchors[3][i] + anchors[1][i];
+        float h       = exp(boxes_dataPtr[i + 2 * OUTPUT_NUM] / H_SCALE) * anchors[2][i];
+        float w       = exp(boxes_dataPtr[i + 3 * OUTPUT_NUM] / W_SCALE) * anchors[3][i];
 
         float ymin    = ( ycenter - h * 0.5 ) * raw_image_height;
         float xmin    = ( xcenter - w * 0.5 ) * raw_image_width;
