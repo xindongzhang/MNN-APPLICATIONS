@@ -4,7 +4,7 @@ trainning your own MSSD model by Google Object Detection API [Tensorflow Object 
 # 2. Exporting tflite model
 For more details of exporting tflite model, please refer to [export tflite](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md). And we List two important steps as follows:
 
-``` python
+``` 
 object_detection/export_tflite_ssd_graph.py  \
 --pipeline_config_path=$CONFIG_FILE          \
 --trained_checkpoint_prefix=$CHECKPOINT_PATH \
@@ -12,7 +12,7 @@ object_detection/export_tflite_ssd_graph.py  \
 --add_postprocessing_op=false
 ```
 
-``` python
+``` 
 bazel run --config=opt tensorflow/lite/toco:toco -- \
 --input_file=$OUTPUT_DIR/tflite_graph.pb            \
 --output_file=$OUTPUT_DIR/detect.tflite             \
