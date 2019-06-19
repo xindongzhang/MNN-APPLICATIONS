@@ -28,7 +28,7 @@ MNN is a lightweight deep neural network inference engine [MNN](https://github.c
 
 # 4. Convert tflite model to mnn model 
 For details, please follow [link](https://github.com/alibaba/MNN/blob/master/tools/converter/README.md). By only simple command line as follow you can get MNN model for MSSD, if you do it right. The following command is only for example, you need to replace items in --modelFile and --MNNModel with yours respectively.
-``` python
+``` 
 ./MNNConvert -f TFLITE --modelFile ~/Desktop/DMS-data/facedet/trained_model/detect.tflite --MNNModel ~/Desktop/face_det.mnn --bizCode MNN
 ```
 
@@ -37,20 +37,20 @@ This demo depends on [OpenCV on Android](https://sourceforge.net/projects/opencv
 
 Then, by following simple command, you should get the libs if you have done things right.
 
-``` python
+``` 
 cd jni
 ndk-build
 ```
 
 In order to test it, we push them to the android devices. For example, here we suppose you are in jni folder.
 
-``` python
+``` 
 adb push ../libs/arm64-v8a/* /data/local/tmp
 adb push image.jpg /data/local/tmp
 ```
 
 Then we need to set up the enviroment for testing in android devices, like
-``` python
+``` 
 adb shell   
 cd /data/local/tmp
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp
@@ -58,11 +58,11 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp
 
 then, in /data/local/tmp, run the executable files **mssd**
 
-``` python
+``` 
 ./mssd
 ```
 
 The last step, close the adb shell session, and pull the output result back to your desktop.
-``` python
+``` 
 adb pull /data/local/tmp/output.jpg ./
 ```
