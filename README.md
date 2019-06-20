@@ -35,7 +35,11 @@ For details, please follow [link](https://github.com/alibaba/MNN/blob/master/too
 # 5. Compile and execute demo
 This demo depends on [OpenCV on Android](https://sourceforge.net/projects/opencvlibrary/files/4.1.0/opencv-4.1.0-android-sdk.zip/download) and [MNN](https://github.com/alibaba/MNN), please download them respectively. First, you need to revise **OpenCV_BASE** and **MNN_BASE** in jni/Android.mk acording to your desktop environment. And remember to install NDK, I use **android-ndk-r17c** for compilation in my desktop.
 
-Then, by following simple command, you should get the libs if you have done things right.
+Then, by following simple command, you should get libs and executable file
+
+
+
+if you have done things right.
 
 ``` 
 cd jni
@@ -57,7 +61,7 @@ cd /data/local/tmp
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp
 ```
 
-then, in /data/local/tmp, run the executable files **mssd**
+then, in /data/local/tmp, run the executable file **mssd**
 
 ``` 
 ./mssd
