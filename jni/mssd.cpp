@@ -36,19 +36,6 @@ int main(void)
     image.convertTo(image, CV_32FC3);
     image = (image - img_mean) / img_std;
 
-    // convert nhwc to nchw
-    std::vector<cv::Mat> channels(3);
-    cv::split(image, channels);
-    std::vector<float> data_;
-    for (auto &c : channels) {
-        data_.insert(data_.end(), (float *)c.datastart, (float *)c.dataend);
-    }
-    int    nums  = 3 * INPUT_SIZE * INPUT_SIZE;
-    float* data  = new float[nums];
-    for (int i = 0; i < nums; ++i){
-        data[i] = data_[i];
-    }
-
     // wrapping input tensor, convert nhwc to nchw    
     std::vector<int> dims{1, INPUT_SIZE, INPUT_SIZE, 3};
     auto nhwc_Tensor = MNN::Tensor::create<float>(dims, NULL, MNN::Tensor::TENSORFLOW);
@@ -119,6 +106,5 @@ int main(void)
     cv::imwrite("./output.jpg", raw_image);
     printf("max prob: %f\n", maxProb);
 
-    delete[] data;
     return 0;
 }
