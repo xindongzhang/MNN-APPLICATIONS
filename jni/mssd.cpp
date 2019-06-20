@@ -74,6 +74,7 @@ int main(void)
     cv::Rect biggest_face;
     for(int i = 0; i < OUTPUT_NUM; ++i)
     {
+        // location decoding
         float ycenter =     boxes_dataPtr[i + 0 * OUTPUT_NUM] / Y_SCALE  * anchors[2][i] + anchors[0][i];
         float xcenter =     boxes_dataPtr[i + 1 * OUTPUT_NUM] / X_SCALE  * anchors[3][i] + anchors[1][i];
         float h       = exp(boxes_dataPtr[i + 2 * OUTPUT_NUM] / H_SCALE) * anchors[2][i];
@@ -84,7 +85,7 @@ int main(void)
         float ymax    = ( ycenter + h * 0.5 ) * raw_image_height;
         float xmax    = ( xcenter + w * 0.5 ) * raw_image_width;
 
-
+        // probability decoding, softmax
         float nonface_prob = exp(scores_dataPtr[i*2 + 0]);
         float face_prob    = exp(scores_dataPtr[i*2 + 1]);
         float ss           = nonface_prob + face_prob;
