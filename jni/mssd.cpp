@@ -66,7 +66,7 @@ int main(void)
     tensor_scores->copyToHostTensor(&tensor_scores_host);
     tensor_boxes->copyToHostTensor(&tensor_boxes_host);
 
-    // pose processing step, DIY NMS, 
+    // post processing step, DIY NMS, 
     // find biggest face
     float maxProb = 0.0f;
     auto scores_dataPtr = tensor_scores_host.host<float>();
