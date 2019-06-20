@@ -73,4 +73,4 @@ adb pull /data/local/tmp/output.jpg ./
 ```
 
 # 6. Discussion
-For more discussion, you can contact me via Wechat: ***zxd675816777*
+For more discussion, you can contact me via Wechat: **zxd675816777**
