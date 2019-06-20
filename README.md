@@ -71,3 +71,6 @@ The last step, close the adb shell session, and pull the output result back to y
 ``` 
 adb pull /data/local/tmp/output.jpg ./
 ```
+
+# 6. Discussion
+For more discussion, you can contact me via Wechat: ***zxd675816777*
