@@ -34,7 +34,7 @@ float iou(cv::Rect box0, cv::Rect box1)
 int main(void)
 {
     std::string image_name = "./body.jpg";
-    std::string model_name = "./tf_face_det.mnn";
+    std::string model_name = "./tf_body_det.mnn";
     int forward = MNN_FORWARD_CPU;
     int precision = 2;
 
@@ -69,8 +69,6 @@ int main(void)
     config.backendConfig = &backendConfig;
 
     // preprocessing
-    float img_mean = 123.0f;
-    float img_std  = 58.0f;
     image.convertTo(image, CV_32FC3);
     image = (image * 2 / 255.0f) - 1;
 
@@ -86,19 +84,6 @@ int main(void)
     auto inputTensor  = net->getSessionInput(session, nullptr);
     inputTensor->copyFromHostTensor(nhwc_Tensor);
 
-    // check input type
-    int input_type = inputTensor->getDimensionType();
-    if (input_type == MNN::Tensor::TENSORFLOW) {
-        printf("tensorflow\n");
-    }
-    if (input_type == MNN::Tensor::CAFFE) {
-        printf("caffe\n");
-    }
-    if (input_type == MNN::Tensor::CAFFE_C4){
-        printf("caffe c4");
-    }
-
-
     // run network
     net->runSession(session);
 
@@ -110,38 +95,6 @@ int main(void)
     MNN::Tensor *tensor_scores  = net->getSessionOutput(session, output_tensor_name0.c_str());
     MNN::Tensor *tensor_boxes   = net->getSessionOutput(session, output_tensor_name1.c_str());
     MNN::Tensor *tensor_anchors = net->getSessionOutput(session, output_tensor_name2.c_str());
-
-    int score_type = tensor_scores->getDimensionType();
-    int score_n = tensor_scores->batch();
-    int score_c = tensor_scores->channel();
-    int score_h = tensor_scores->height();
-    int score_w = tensor_scores->width();
-
-    int box_type = tensor_boxes->getDimensionType();
-    int box_n = tensor_boxes->batch();
-    int box_c = tensor_boxes->channel();
-    int box_h = tensor_boxes->height();
-    int box_w = tensor_boxes->width();
-
-    int anchor_type = tensor_boxes->getDimensionType();
-    int anchor_n = tensor_anchors->batch();
-    int anchor_c = tensor_anchors->channel();
-    int anchor_h = tensor_anchors->height();
-    int anchor_w = tensor_anchors->width();
-
-    if (anchor_type == MNN::Tensor::TENSORFLOW) {
-        printf("tensorflow\n");
-    }
-    if (anchor_type == MNN::Tensor::CAFFE) {
-        printf("caffe\n");
-    }
-    if (anchor_type == MNN::Tensor::CAFFE_C4){
-        printf("caffe c4");
-    }
-    printf("%d, %d, %d, %d\n", score_n, score_h, score_w, score_c);
-    printf("%d, %d, %d, %d\n", box_n, box_h, box_w, box_c);
-    printf("%d, %d, %d, %d\n", anchor_n, anchor_h, anchor_w, anchor_c);
-
 
     MNN::Tensor tensor_scores_host(tensor_scores, tensor_scores->getDimensionType());
     MNN::Tensor tensor_boxes_host(tensor_boxes, tensor_boxes->getDimensionType());
@@ -175,10 +128,6 @@ int main(void)
         // probability decoding, softmax
         float nonface_prob = scores_dataPtr[i*2 + 0];
         float face_prob    = scores_dataPtr[i*2 + 1];
-        // float nonface_prob = exp(scores_dataPtr[i*2 + 0]);
-        // float face_prob    = exp(scores_dataPtr[i*2 + 1]);
-        // nonface_prob       = nonface_prob / (nonface_prob + 1.0f);
-        // face_prob          = face_prob    / (face_prob    + 1.0f);
 
         if (face_prob > nonface_prob) {
             cv::Rect tmp_face;

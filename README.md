@@ -32,16 +32,22 @@ MNN is a lightweight deep neural network inference engine [MNN](https://github.c
 
 # 4. Convert tflite model to mnn model 
 For details, please follow [link](https://github.com/alibaba/MNN/blob/master/tools/converter/README.md). By only simple command line as follow you can get MNN model for MSSD, if you do it right. The following command is only for example, you need to replace items in --modelFile and --MNNModel with yours respectively.
+
 ``` 
 ./MNNConvert -f TFLITE --modelFile ~/Desktop/DMS-data/facedet/trained_model/detect.tflite --MNNModel ~/Desktop/face_det.mnn --bizCode MNN
 ```
+
+And for tensorflow pb files, type
+
+``` 
+./MNNConvert -f TF --modelFile ~/Desktop/DMS-data/facedet/trained_model/detect.tflite --MNNModel ~/Desktop/face_det.mnn --bizCode MNN
+```
+
 
 # 5. Compile and execute demo
 This demo depends on [OpenCV on Android](https://sourceforge.net/projects/opencvlibrary/files/4.1.0/opencv-4.1.0-android-sdk.zip/download) and [MNN](https://github.com/alibaba/MNN), please download them respectively. First, you need to revise **OpenCV_BASE** and **MNN_BASE** in jni/Android.mk acording to your desktop environment. And remember to install NDK, I use **android-ndk-r17c** for compilation in my desktop.
 
 Then, by following simple command, you should get libs and executable file
-
-
 
 if you have done things right.
 
