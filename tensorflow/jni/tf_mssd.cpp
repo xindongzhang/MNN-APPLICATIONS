@@ -129,7 +129,7 @@ int main(void)
         float nonface_prob = scores_dataPtr[i*2 + 0];
         float face_prob    = scores_dataPtr[i*2 + 1];
 
-        if (face_prob > nonface_prob) {
+        if (face_prob > nonface_prob && face_prob > score_threshold) {
             cv::Rect tmp_face;
             tmp_face.x = xmin;
             tmp_face.y = ymin;
