@@ -12,6 +12,10 @@ object_detection/export_tflite_ssd_graph.py  \
 --add_postprocessing_op=false
 ```
 
+After this step, you got a pb file. **If you would like to use tensorflow pb model for this MNN project, you can straightly jump the /tensorflow/jni, there are codes and details for it.**
+
+If you would like to use tflite for this MNN project, please be patient. You still need to go throught the rest of this document.
+
 ``` 
 bazel run --config=opt tensorflow/lite/toco:toco -- \
 --input_file=$OUTPUT_DIR/tflite_graph.pb            \

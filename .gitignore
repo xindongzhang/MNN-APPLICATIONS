@@ -1,2 +1,4 @@
-/libs/*
-/obj/*
+tensorflow/libs/*
+tensorflow/obj/*
+tflite/libs/*
+tflite/obj/*
