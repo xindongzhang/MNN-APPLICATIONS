@@ -1,5 +1,5 @@
 # MNN-APPLICATIONS
-mobilenet-ssd inference by MNN,  JNI exec, RK3399. Support tflite and tensorflow model.
+applications by MNN,  JNI exec, RK3399. Support tflite and tensorflow model.
 
 ---
 1. MSSD算法介绍和部署：  
