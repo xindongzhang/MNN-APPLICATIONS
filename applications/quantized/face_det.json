@@ -1,0 +1,16 @@
+{
+    "format":"RGB",
+    "mean":[
+        123.0,
+        123.0,
+        123.0
+    ],
+    "normal":[
+        0.017,
+        0.017,
+        0.017
+    ],
+    "width":224,
+    "height":224,
+    "path":"/Users/xindongzhang/Documents/GitHub/MNN_MSSD/quantized/images"
+}

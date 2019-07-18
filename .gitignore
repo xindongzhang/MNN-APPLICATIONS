@@ -1,4 +1,11 @@
-tensorflow/libs/*
-tensorflow/obj/*
-tflite/libs/*
-tflite/obj/*
+applications/quantized/images/*
+applications/quantized/models/*
+
+applications/mssd/tensorflow/libs/*
+applications/mssd/tensorflow/obj/*
+
+applications/mssd/tflite/libs/*
+applications/mssd/tflite/obj/*
+
+applications/blazeface/tensorflow/libs/*
+applications/blazeface/tensorflow/obj/*
