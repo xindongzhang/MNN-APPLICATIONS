@@ -26,7 +26,7 @@ int main(void)
     int INPUT_H = 240;
     int OUTPUT_NUMS = 50;
 
-    float score_threshold = 0.25f;
+    float score_threshold = 0.5f;
     int mean[3] = { 104,117,123 };
 
     cv::Mat raw_image    = cv::imread(image_name.c_str());
