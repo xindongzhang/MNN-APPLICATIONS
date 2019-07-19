@@ -35,14 +35,15 @@ float iou(cv::Rect box0, cv::Rect box1)
 
 int main(void)
 {
-    std::string image_name = "./body.jpg";
-    std::string model_name = "./tf_body_det.mnn";
+    std::string image_name = "./nopluz_2.jpg";
+    std::string model_name = "./bsd.mnn";
     int forward = MNN_FORWARD_CPU;
+    // int forward = MNN_FORWARD_OPENCL;
 
     int precision = 2;
     int power     = 0;
     int memory    = 0;
-    int threads   = 1;
+    int threads   = 2;
 
     int INPUT_SIZE = 300;
     int OUTPUT_NUM = 1917;
@@ -50,7 +51,7 @@ int main(void)
     float Y_SCALE    = 10.0;   
     float H_SCALE    = 5.0;  
     float W_SCALE    = 5.0;
-    float score_threshold = 0.5f;
+    float score_threshold = 0.4f;
     float nms_threshold   = 0.45f;
 
     cv::Mat raw_image    = cv::imread(image_name.c_str());

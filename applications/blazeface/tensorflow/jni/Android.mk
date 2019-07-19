@@ -38,7 +38,7 @@ LOCAL_C_INCLUDES += $(MNN_BASE)/include/source/math
 LOCAL_C_INCLUDES += $(MNN_BASE)/include/source/shape
 
 LOCAL_SRC_FILES := \
-                tf_mssd.cpp \
+                tf_blazeface.cpp \
 				$(MNN_BASE)/include/tools/cpp/revertMNNModel.cpp
 
 

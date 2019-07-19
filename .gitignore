@@ -9,3 +9,6 @@ applications/mssd/tflite/obj/*
 
 applications/blazeface/tensorflow/libs/*
 applications/blazeface/tensorflow/obj/*
+
+applications/yufacedetect/caffe/libs/*
+applications/yufacedetect/caffe/obj/*
