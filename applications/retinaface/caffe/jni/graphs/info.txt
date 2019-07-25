@@ -1,0 +1,10 @@
+[10:14:33] /Users/xindongzhang/MNN/tools/converter/source/optimizer/optimizer.cpp:44: Inputs: data
+[10:14:33] /Users/xindongzhang/MNN/tools/converter/source/optimizer/optimizer.cpp:54: Outputs: face_rpn_bbox_pred_stride32, Type = Convolution
+[10:14:33] /Users/xindongzhang/MNN/tools/converter/source/optimizer/optimizer.cpp:54: Outputs: face_rpn_landmark_pred_stride32, Type = Convolution
+[10:14:33] /Users/xindongzhang/MNN/tools/converter/source/optimizer/optimizer.cpp:54: Outputs: face_rpn_cls_prob_reshape_stride32, Type = Reshape
+[10:14:33] /Users/xindongzhang/MNN/tools/converter/source/optimizer/optimizer.cpp:54: Outputs: face_rpn_bbox_pred_stride16, Type = Convolution
+[10:14:33] /Users/xindongzhang/MNN/tools/converter/source/optimizer/optimizer.cpp:54: Outputs: face_rpn_landmark_pred_stride16, Type = Convolution
+[10:14:33] /Users/xindongzhang/MNN/tools/converter/source/optimizer/optimizer.cpp:54: Outputs: face_rpn_cls_prob_reshape_stride16, Type = Reshape
+[10:14:33] /Users/xindongzhang/MNN/tools/converter/source/optimizer/optimizer.cpp:54: Outputs: face_rpn_bbox_pred_stride8, Type = Convolution
+[10:14:33] /Users/xindongzhang/MNN/tools/converter/source/optimizer/optimizer.cpp:54: Outputs: face_rpn_landmark_pred_stride8, Type = Convolution
+[10:14:33] /Users/xindongzhang/MNN/tools/converter/source/optimizer/optimizer.cpp:54: Outputs: face_rpn_cls_prob_reshape_stride8, Type = Reshape

@@ -35,23 +35,26 @@ float iou(cv::Rect box0, cv::Rect box1)
 
 int main(void)
 {
-    std::string image_name = "./nopluz_2.jpg";
-    std::string model_name = "./bsd.mnn";
+    std::string image_name = "./nopluz_0.jpg";
+    std::string model_name = "./bsd_224x224.mnn";
     int forward = MNN_FORWARD_CPU;
     // int forward = MNN_FORWARD_OPENCL;
 
     int precision = 2;
     int power     = 0;
     int memory    = 0;
-    int threads   = 2;
+    int threads   = 1;
 
-    int INPUT_SIZE = 300;
-    int OUTPUT_NUM = 1917;
+    // int INPUT_SIZE = 300;
+    // int OUTPUT_NUM = 1917; // for 300x300
+
+    int INPUT_SIZE = 224;
+    int OUTPUT_NUM = 1014; // for 224x224
     float X_SCALE    = 10.0;
     float Y_SCALE    = 10.0;   
     float H_SCALE    = 5.0;  
     float W_SCALE    = 5.0;
-    float score_threshold = 0.4f;
+    float score_threshold = 0.5f;
     float nms_threshold   = 0.45f;
 
     cv::Mat raw_image    = cv::imread(image_name.c_str());
@@ -197,7 +200,7 @@ int main(void)
         vis_box.y = (int) face.y;
         vis_box.width  = (int) face.width;
         vis_box.height = (int) face.height;
-        cv::rectangle(raw_image, vis_box, cv::Scalar(0,0,255), 1);
+        cv::rectangle(raw_image, vis_box, cv::Scalar(0,0,255), 2);
     }
 
     cv::imwrite("./output.jpg", raw_image);

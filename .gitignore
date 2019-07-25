@@ -12,3 +12,14 @@ applications/blazeface/tensorflow/obj/*
 
 applications/yufacedetect/caffe/libs/*
 applications/yufacedetect/caffe/obj/*
+
+applications/retinaface/caffe/libs/*
+applications/retinaface/caffe/obj/*
+applications/retinaface/caffe/jni/graphs/mnet.caffemodel
+applications/retinaface/caffe/jni/graphs/mnet.prototxt
+
+## not yet
+applications/pelee/*
+applications/mtcnn/*
+applications/openpose/*
+applications/zhazhafei/*
