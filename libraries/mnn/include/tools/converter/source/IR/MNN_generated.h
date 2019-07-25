@@ -145,6 +145,9 @@ enum OpType {
   OpType_RNNSequenceGRU = 105,
   OpType_BatchMatMul = 106,
   OpType_Unsqueeze = 107,
+  OpType_CosineSimilarity = 108,
+  OpType_DepthToSpace = 109,
+  OpType_SpaceToDepth = 110,
   OpType_MaxLayerCount = 128,
   OpType_ConvertTensor = 129,
   OpType_PLUGIN = 256,
@@ -166,7 +169,7 @@ enum OpType {
   OpType_MAX = OpType_FloatToInt8
 };
 
-inline const OpType (&EnumValuesOpType())[125] {
+inline const OpType (&EnumValuesOpType())[128] {
   static const OpType values[] = {
     OpType_AbsVal,
     OpType_QuantizedAdd,
@@ -276,6 +279,9 @@ inline const OpType (&EnumValuesOpType())[125] {
     OpType_RNNSequenceGRU,
     OpType_BatchMatMul,
     OpType_Unsqueeze,
+    OpType_CosineSimilarity,
+    OpType_DepthToSpace,
+    OpType_SpaceToDepth,
     OpType_MaxLayerCount,
     OpType_ConvertTensor,
     OpType_PLUGIN,
@@ -407,9 +413,9 @@ inline const char * const *EnumNamesOpType() {
     "RNNSequenceGRU",
     "BatchMatMul",
     "Unsqueeze",
-    "",
-    "",
-    "",
+    "CosineSimilarity",
+    "DepthToSpace",
+    "SpaceToDepth",
     "",
     "",
     "",
@@ -904,11 +910,12 @@ enum OpParameter {
   OpParameter_RNNParam = 72,
   OpParameter_BatchMatMulParam = 73,
   OpParameter_QuantizedFloatParam = 74,
+  OpParameter_DepthSpaceParam = 75,
   OpParameter_MIN = OpParameter_NONE,
-  OpParameter_MAX = OpParameter_QuantizedFloatParam
+  OpParameter_MAX = OpParameter_DepthSpaceParam
 };
 
-inline const OpParameter (&EnumValuesOpParameter())[75] {
+inline const OpParameter (&EnumValuesOpParameter())[76] {
   static const OpParameter values[] = {
     OpParameter_NONE,
     OpParameter_QuantizedAdd,
@@ -984,7 +991,8 @@ inline const OpParameter (&EnumValuesOpParameter())[75] {
     OpParameter_MomentsParam,
     OpParameter_RNNParam,
     OpParameter_BatchMatMulParam,
-    OpParameter_QuantizedFloatParam
+    OpParameter_QuantizedFloatParam,
+    OpParameter_DepthSpaceParam
   };
   return values;
 }
@@ -1066,13 +1074,14 @@ inline const char * const *EnumNamesOpParameter() {
     "RNNParam",
     "BatchMatMulParam",
     "QuantizedFloatParam",
+    "DepthSpaceParam",
     nullptr
   };
   return names;
 }
 
 inline const char *EnumNameOpParameter(OpParameter e) {
-  if (e < OpParameter_NONE || e > OpParameter_QuantizedFloatParam) return "";
+  if (e < OpParameter_NONE || e > OpParameter_DepthSpaceParam) return "";
   const size_t index = static_cast<int>(e);
   return EnumNamesOpParameter()[index];
 }
@@ -1375,6 +1384,10 @@ template<> struct OpParameterTraits<BatchMatMulParam> {
 
 template<> struct OpParameterTraits<QuantizedFloatParam> {
   static const OpParameter enum_value = OpParameter_QuantizedFloatParam;
+};
+
+template<> struct OpParameterTraits<DepthSpaceParam> {
+  static const OpParameter enum_value = OpParameter_DepthSpaceParam;
 };
 
 struct OpParameterUnion {
@@ -2000,6 +2013,14 @@ struct OpParameterUnion {
     return type == OpParameter_QuantizedFloatParam ?
       reinterpret_cast<const QuantizedFloatParamT *>(value) : nullptr;
   }
+  DepthSpaceParamT *AsDepthSpaceParam() {
+    return type == OpParameter_DepthSpaceParam ?
+      reinterpret_cast<DepthSpaceParamT *>(value) : nullptr;
+  }
+  const DepthSpaceParamT *AsDepthSpaceParam() const {
+    return type == OpParameter_DepthSpaceParam ?
+      reinterpret_cast<const DepthSpaceParamT *>(value) : nullptr;
+  }
 };
 
 bool VerifyOpParameter(flatbuffers::Verifier &verifier, const void *obj, OpParameter type);
@@ -2395,6 +2416,9 @@ struct Op FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const QuantizedFloatParam *main_as_QuantizedFloatParam() const {
     return main_type() == OpParameter_QuantizedFloatParam ? static_cast<const QuantizedFloatParam *>(main()) : nullptr;
   }
+  const DepthSpaceParam *main_as_DepthSpaceParam() const {
+    return main_type() == OpParameter_DepthSpaceParam ? static_cast<const DepthSpaceParam *>(main()) : nullptr;
+  }
   void *mutable_main() {
     return GetPointer<void *>(VT_MAIN);
   }
@@ -2729,6 +2753,10 @@ template<> inline const BatchMatMulParam *Op::main_as<BatchMatMulParam>() const 
 
 template<> inline const QuantizedFloatParam *Op::main_as<QuantizedFloatParam>() const {
   return main_as_QuantizedFloatParam();
+}
+
+template<> inline const DepthSpaceParam *Op::main_as<DepthSpaceParam>() const {
+  return main_as_DepthSpaceParam();
 }
 
 struct OpBuilder {
@@ -3574,6 +3602,10 @@ inline bool VerifyOpParameter(flatbuffers::Verifier &verifier, const void *obj, 
       auto ptr = reinterpret_cast<const QuantizedFloatParam *>(obj);
       return verifier.VerifyTable(ptr);
     }
+    case OpParameter_DepthSpaceParam: {
+      auto ptr = reinterpret_cast<const DepthSpaceParam *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
     default: return false;
   }
 }
@@ -3888,6 +3920,10 @@ inline void *OpParameterUnion::UnPack(const void *obj, OpParameter type, const f
       auto ptr = reinterpret_cast<const QuantizedFloatParam *>(obj);
       return ptr->UnPack(resolver);
     }
+    case OpParameter_DepthSpaceParam: {
+      auto ptr = reinterpret_cast<const DepthSpaceParam *>(obj);
+      return ptr->UnPack(resolver);
+    }
     default: return nullptr;
   }
 }
@@ -4190,6 +4226,10 @@ inline flatbuffers::Offset<void> OpParameterUnion::Pack(flatbuffers::FlatBufferB
       auto ptr = reinterpret_cast<const QuantizedFloatParamT *>(value);
       return CreateQuantizedFloatParam(_fbb, ptr, _rehasher).Union();
     }
+    case OpParameter_DepthSpaceParam: {
+      auto ptr = reinterpret_cast<const DepthSpaceParamT *>(value);
+      return CreateDepthSpaceParam(_fbb, ptr, _rehasher).Union();
+    }
     default: return 0;
   }
 }
@@ -4490,6 +4530,10 @@ inline OpParameterUnion::OpParameterUnion(const OpParameterUnion &u) FLATBUFFERS
     }
     case OpParameter_QuantizedFloatParam: {
       value = new QuantizedFloatParamT(*reinterpret_cast<QuantizedFloatParamT *>(u.value));
+      break;
+    }
+    case OpParameter_DepthSpaceParam: {
+      value = new DepthSpaceParamT(*reinterpret_cast<DepthSpaceParamT *>(u.value));
       break;
     }
     default:
@@ -4869,6 +4913,11 @@ inline void OpParameterUnion::Reset() {
       delete ptr;
       break;
     }
+    case OpParameter_DepthSpaceParam: {
+      auto ptr = reinterpret_cast<DepthSpaceParamT *>(value);
+      delete ptr;
+      break;
+    }
     default: break;
   }
   value = nullptr;
@@ -5001,12 +5050,15 @@ inline const flatbuffers::TypeTable *OpTypeTypeTable() {
     { flatbuffers::ET_INT, 0, 0 },
     { flatbuffers::ET_INT, 0, 0 },
     { flatbuffers::ET_INT, 0, 0 },
+    { flatbuffers::ET_INT, 0, 0 },
+    { flatbuffers::ET_INT, 0, 0 },
+    { flatbuffers::ET_INT, 0, 0 },
     { flatbuffers::ET_INT, 0, 0 }
   };
   static const flatbuffers::TypeFunction type_refs[] = {
     OpTypeTypeTable
   };
-  static const int64_t values[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 128, 129, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 513, 514, 515, 516, 517 };
+  static const int64_t values[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 128, 129, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 513, 514, 515, 516, 517 };
   static const char * const names[] = {
     "AbsVal",
     "QuantizedAdd",
@@ -5116,6 +5168,9 @@ inline const flatbuffers::TypeTable *OpTypeTypeTable() {
     "RNNSequenceGRU",
     "BatchMatMul",
     "Unsqueeze",
+    "CosineSimilarity",
+    "DepthToSpace",
+    "SpaceToDepth",
     "MaxLayerCount",
     "ConvertTensor",
     "PLUGIN",
@@ -5135,7 +5190,7 @@ inline const flatbuffers::TypeTable *OpTypeTypeTable() {
     "FloatToInt8"
   };
   static const flatbuffers::TypeTable tt = {
-    flatbuffers::ST_ENUM, 125, type_codes, type_refs, values, names
+    flatbuffers::ST_ENUM, 128, type_codes, type_refs, values, names
   };
   return &tt;
 }
@@ -5216,7 +5271,8 @@ inline const flatbuffers::TypeTable *OpParameterTypeTable() {
     { flatbuffers::ET_SEQUENCE, 0, 70 },
     { flatbuffers::ET_SEQUENCE, 0, 71 },
     { flatbuffers::ET_SEQUENCE, 0, 72 },
-    { flatbuffers::ET_SEQUENCE, 0, 73 }
+    { flatbuffers::ET_SEQUENCE, 0, 73 },
+    { flatbuffers::ET_SEQUENCE, 0, 74 }
   };
   static const flatbuffers::TypeFunction type_refs[] = {
     QuantizedAddTypeTable,
@@ -5292,7 +5348,8 @@ inline const flatbuffers::TypeTable *OpParameterTypeTable() {
     MomentsParamTypeTable,
     RNNParamTypeTable,
     BatchMatMulParamTypeTable,
-    QuantizedFloatParamTypeTable
+    QuantizedFloatParamTypeTable,
+    DepthSpaceParamTypeTable
   };
   static const char * const names[] = {
     "NONE",
@@ -5369,10 +5426,11 @@ inline const flatbuffers::TypeTable *OpParameterTypeTable() {
     "MomentsParam",
     "RNNParam",
     "BatchMatMulParam",
-    "QuantizedFloatParam"
+    "QuantizedFloatParam",
+    "DepthSpaceParam"
   };
   static const flatbuffers::TypeTable tt = {
-    flatbuffers::ST_UNION, 75, type_codes, type_refs, nullptr, names
+    flatbuffers::ST_UNION, 76, type_codes, type_refs, nullptr, names
   };
   return &tt;
 }

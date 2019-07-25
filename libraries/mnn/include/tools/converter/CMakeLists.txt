@@ -36,14 +36,14 @@ if (${CMAKE_VERSION} VERSION_LESS "3.6.0")
 endif()
 
 # -----------set path-----------
-set(SRC_PATH source)
+set(SRC_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source)
 set(IR_PATH ${SRC_PATH}/IR)
 set(COMMON_PATH ${SRC_PATH}/common)
 set(CAFFE_PATH ${SRC_PATH}/caffe)
 set(TENSORFLOW_PATH ${SRC_PATH}/tensorflow)
 set(ONNX_PATH ${SRC_PATH}/onnx)
 set(TFLITE_PATH ${SRC_PATH}/tflite)
-set(MNN_PATH ${SRC_PATH}/mnn)
+set(MNN_PATH ${SRC_PATH}/MNN)
 set(OPTIMIZER_PATH ${SRC_PATH}/optimizer)
 set(INCLUDE_PATH ${SRC_PATH}/include)
 

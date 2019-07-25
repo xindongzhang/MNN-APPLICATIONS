@@ -98,6 +98,9 @@ struct RNNParamT;
 struct BatchMatMulParam;
 struct BatchMatMulParamT;
 
+struct DepthSpaceParam;
+struct DepthSpaceParamT;
+
 inline const flatbuffers::TypeTable *BinaryOpTypeTable();
 
 inline const flatbuffers::TypeTable *PackParamTypeTable();
@@ -155,6 +158,8 @@ inline const flatbuffers::TypeTable *MomentsParamTypeTable();
 inline const flatbuffers::TypeTable *RNNParamTypeTable();
 
 inline const flatbuffers::TypeTable *BatchMatMulParamTypeTable();
+
+inline const flatbuffers::TypeTable *DepthSpaceParamTypeTable();
 
 enum BinaryOpOperation {
   BinaryOpOperation_ADD = 0,
@@ -2900,6 +2905,66 @@ inline flatbuffers::Offset<BatchMatMulParam> CreateBatchMatMulParam(
 
 flatbuffers::Offset<BatchMatMulParam> CreateBatchMatMulParam(flatbuffers::FlatBufferBuilder &_fbb, const BatchMatMulParamT *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
 
+struct DepthSpaceParamT : public flatbuffers::NativeTable {
+  typedef DepthSpaceParam TableType;
+  int32_t blockSize;
+  DepthSpaceParamT()
+      : blockSize(0) {
+  }
+};
+
+struct DepthSpaceParam FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef DepthSpaceParamT NativeTableType;
+  static const flatbuffers::TypeTable *MiniReflectTypeTable() {
+    return DepthSpaceParamTypeTable();
+  }
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_BLOCKSIZE = 4
+  };
+  int32_t blockSize() const {
+    return GetField<int32_t>(VT_BLOCKSIZE, 0);
+  }
+  bool mutate_blockSize(int32_t _blockSize) {
+    return SetField<int32_t>(VT_BLOCKSIZE, _blockSize, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<int32_t>(verifier, VT_BLOCKSIZE) &&
+           verifier.EndTable();
+  }
+  DepthSpaceParamT *UnPack(const flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  void UnPackTo(DepthSpaceParamT *_o, const flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  static flatbuffers::Offset<DepthSpaceParam> Pack(flatbuffers::FlatBufferBuilder &_fbb, const DepthSpaceParamT* _o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
+};
+
+struct DepthSpaceParamBuilder {
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_blockSize(int32_t blockSize) {
+    fbb_.AddElement<int32_t>(DepthSpaceParam::VT_BLOCKSIZE, blockSize, 0);
+  }
+  explicit DepthSpaceParamBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  DepthSpaceParamBuilder &operator=(const DepthSpaceParamBuilder &);
+  flatbuffers::Offset<DepthSpaceParam> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<DepthSpaceParam>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<DepthSpaceParam> CreateDepthSpaceParam(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    int32_t blockSize = 0) {
+  DepthSpaceParamBuilder builder_(_fbb);
+  builder_.add_blockSize(blockSize);
+  return builder_.Finish();
+}
+
+flatbuffers::Offset<DepthSpaceParam> CreateDepthSpaceParam(flatbuffers::FlatBufferBuilder &_fbb, const DepthSpaceParamT *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
+
 inline BinaryOpT *BinaryOp::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = new BinaryOpT();
   UnPackTo(_o, _resolver);
@@ -3792,6 +3857,32 @@ inline flatbuffers::Offset<BatchMatMulParam> CreateBatchMatMulParam(flatbuffers:
       _adjY);
 }
 
+inline DepthSpaceParamT *DepthSpaceParam::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
+  auto _o = new DepthSpaceParamT();
+  UnPackTo(_o, _resolver);
+  return _o;
+}
+
+inline void DepthSpaceParam::UnPackTo(DepthSpaceParamT *_o, const flatbuffers::resolver_function_t *_resolver) const {
+  (void)_o;
+  (void)_resolver;
+  { auto _e = blockSize(); _o->blockSize = _e; };
+}
+
+inline flatbuffers::Offset<DepthSpaceParam> DepthSpaceParam::Pack(flatbuffers::FlatBufferBuilder &_fbb, const DepthSpaceParamT* _o, const flatbuffers::rehasher_function_t *_rehasher) {
+  return CreateDepthSpaceParam(_fbb, _o, _rehasher);
+}
+
+inline flatbuffers::Offset<DepthSpaceParam> CreateDepthSpaceParam(flatbuffers::FlatBufferBuilder &_fbb, const DepthSpaceParamT *_o, const flatbuffers::rehasher_function_t *_rehasher) {
+  (void)_rehasher;
+  (void)_o;
+  struct _VectorArgs { flatbuffers::FlatBufferBuilder *__fbb; const DepthSpaceParamT* __o; const flatbuffers::rehasher_function_t *__rehasher; } _va = { &_fbb, _o, _rehasher}; (void)_va;
+  auto _blockSize = _o->blockSize;
+  return MNN::CreateDepthSpaceParam(
+      _fbb,
+      _blockSize);
+}
+
 inline const flatbuffers::TypeTable *BinaryOpOperationTypeTable() {
   static const flatbuffers::TypeCode type_codes[] = {
     { flatbuffers::ET_CHAR, 0, 0 },
@@ -4450,6 +4541,19 @@ inline const flatbuffers::TypeTable *BatchMatMulParamTypeTable() {
   };
   static const flatbuffers::TypeTable tt = {
     flatbuffers::ST_TABLE, 2, type_codes, nullptr, nullptr, names
+  };
+  return &tt;
+}
+
+inline const flatbuffers::TypeTable *DepthSpaceParamTypeTable() {
+  static const flatbuffers::TypeCode type_codes[] = {
+    { flatbuffers::ET_INT, 0, -1 }
+  };
+  static const char * const names[] = {
+    "blockSize"
+  };
+  static const flatbuffers::TypeTable tt = {
+    flatbuffers::ST_TABLE, 1, type_codes, nullptr, nullptr, names
   };
   return &tt;
 }

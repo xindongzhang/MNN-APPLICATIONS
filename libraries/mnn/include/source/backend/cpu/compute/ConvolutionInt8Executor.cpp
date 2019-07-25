@@ -13,7 +13,7 @@
 #include "ConvolutionIntFactory.hpp"
 #include "Macro.h"
 #include "TensorUtils.hpp"
-
+#include "Int8FunctionsOpt.h"
 #define MNN_OPEN_TIME_TRACE
 #include "AutoTime.hpp"
 
