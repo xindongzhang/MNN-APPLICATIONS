@@ -18,14 +18,14 @@
 int main(void)
 {
     std::string image_name = "./test.jpg";
-    std::string model_name = "./mnet.mnn";
+    std::string model_name = "./mnet-128x128.mnn";
     int forward = MNN_FORWARD_CPU;
 
     int precision = 2;
     int threads   = 1;
 
-    int INPUT_W = 224;
-    int INPUT_H = 224;
+    int INPUT_W = 128;
+    int INPUT_H = 128;
 
     cv::Mat raw_image    = cv::imread(image_name.c_str());
     cv::cvtColor(raw_image, raw_image, cv::COLOR_BGR2RGB);
