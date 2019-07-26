@@ -35,7 +35,7 @@ float iou(cv::Rect box0, cv::Rect box1)
 
 int main(void)
 {
-    std::string image_name = "./image_02.jpg";
+    std::string image_name = "./image_04.jpg";
     std::string model_name = "./blazeface.mnn";
     int forward = MNN_FORWARD_CPU;
     // int forward = MNN_FORWARD_OPENCL;
