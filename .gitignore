@@ -22,7 +22,9 @@ applications/retinaface/caffe/jni/graphs/mnet.prototxt
 libraries/mnn/include/tools/converter/build/*
 
 ## not yet
-applications/pelee/*
-applications/mtcnn/*
-applications/openpose/*
-applications/zhazhafei/*
+applications/pelee/
+applications/mtcnn/
+applications/openpose/
+applications/zhazhafei/
+applications/mobilefacenet/
+libraries/tensorflow/

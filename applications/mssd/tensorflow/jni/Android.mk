@@ -9,6 +9,11 @@ LOCAL_SRC_FILES := $(MNN_BASE)/libs/libMNN.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := MNN_GL
+LOCAL_SRC_FILES := $(MNN_BASE)/libs/libMNN_GL.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE := MNN_CL
 LOCAL_SRC_FILES := $(MNN_BASE)/libs/libMNN_CL.so
 include $(PREBUILT_SHARED_LIBRARY)
@@ -56,6 +61,7 @@ APP_ALLOW_MISSING_DEPS = true
 LOCAL_SHARED_LIBRARIES :=                             \
                         MNN                           \
 					    MNN_CL                        \
-						MNN_Vulkan                    
+						MNN_Vulkan                    \
+						MNN_GL
 
 include $(BUILD_EXECUTABLE)
