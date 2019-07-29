@@ -35,8 +35,8 @@ float iou(cv::Rect box0, cv::Rect box1)
 
 int main(void)
 {
-    std::string image_name = "./nopluz_0.jpg";
-    std::string model_name = "./bsd_224x224.mnn";
+    std::string image_name = "./body.jpg";
+    std::string model_name = "./tf_body_det.mnn";
     // int forward = MNN_FORWARD_CPU;
     int forward = MNN_FORWARD_OPENCL;
     // int forward = MNN_FORWARD_VULKAN;
@@ -46,11 +46,12 @@ int main(void)
     int memory    = 0;
     int threads   = 1;
 
-    // int INPUT_SIZE = 300;
-    // int OUTPUT_NUM = 1917; // for 300x300
+    int INPUT_SIZE = 300;
+    int OUTPUT_NUM = 1917; // for 300x300
 
-    int INPUT_SIZE = 224;
-    int OUTPUT_NUM = 1014; // for 224x224
+    // int INPUT_SIZE = 224;
+    // int OUTPUT_NUM = 1014; // for 224x224
+
     float X_SCALE    = 10.0;
     float Y_SCALE    = 10.0;   
     float H_SCALE    = 5.0;  
@@ -127,7 +128,7 @@ int main(void)
     auto anchors_dataPtr = tensor_anchors_host.host<float>();
 
 
-    int batch = tensor_scores->batch();
+    int batch   = tensor_scores->batch();
     int channel = tensor_scores->channel();
     int height  = tensor_scores->height();
     int width   = tensor_scores->width();
@@ -152,17 +153,8 @@ int main(void)
         // probability decoding, softmax
         float nonface_prob = scores_dataPtr[i*2 + 0];
         float face_prob    = scores_dataPtr[i*2 + 1];
-        printf("%f, %f\n", nonface_prob, face_prob);
-        // if (i == 194 || i == 236)
-        // {
-        //     cv::Rect tmp_face;
-        //     tmp_face.x = (int)xmin;
-        //     tmp_face.y = (int)ymin;
-        //     tmp_face.width  = (int) (xmax - xmin);
-        //     tmp_face.height = (int) (ymax - ymin);
-        //     cv::rectangle(raw_image, tmp_face, cv::Scalar(0,0,255), 2);
-        // }
-        if (face_prob > score_threshold * 10) {
+
+        if (face_prob > score_threshold) {
             cv::Rect tmp_face;
             tmp_face.x = xmin;
             tmp_face.y = ymin;
