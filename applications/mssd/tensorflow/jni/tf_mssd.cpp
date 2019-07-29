@@ -35,8 +35,8 @@ float iou(cv::Rect box0, cv::Rect box1)
 
 int main(void)
 {
-    std::string image_name = "./body.jpg";
-    std::string model_name = "./tf_body_det.mnn";
+    std::string image_name = "./nopluz_3.jpg";
+    std::string model_name = "./bsd.mnn";
     // int forward = MNN_FORWARD_CPU;
     int forward = MNN_FORWARD_OPENCL;
     // int forward = MNN_FORWARD_VULKAN;
