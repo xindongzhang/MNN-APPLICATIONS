@@ -18,6 +18,11 @@ applications/retinaface/caffe/obj/*
 applications/retinaface/caffe/jni/graphs/mnet.caffemodel
 applications/retinaface/caffe/jni/graphs/mnet.prototxt
 
+applications/mnist/onnx/libs/*
+applications/mnist/onnx/obj/*
+applications/mnist/train/data/*
+applications/mnist/train/*.params
+applications/mnist/train/*.json
 
 libraries/mnn/include/tools/converter/build/*
 
