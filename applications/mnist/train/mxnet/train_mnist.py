@@ -10,13 +10,14 @@ def data_xform(data):
 class MNIST(mx.gluon.HybridBlock):
     def __init__(self, **kwargs):
         super(MNIST, self).__init__(**kwargs)
-        self.conv0  = nn.Conv2D(channels=20, kernel_size=(5,5), activation='relu')
-        self.maxp0  = nn.MaxPool2D(pool_size=(2,2), strides=(2,2))
-        self.conv1  = nn.Conv2D(channels=50, kernel_size=(5,5), activation='relu')
-        self.maxp1  = nn.MaxPool2D(pool_size=(2,2), strides=(2,2))
+        self.conv0  = nn.Conv2D(channels=20, kernel_size=(5, 5), activation='relu')
+        self.maxp0  = nn.MaxPool2D(pool_size=(2, 2), strides=(2, 2))
+        self.conv1  = nn.Conv2D(channels=50, kernel_size=(5, 5), activation='relu')
+        self.maxp1  = nn.MaxPool2D(pool_size=(2, 2), strides=(2, 2))
         self.flaten = nn.Flatten()
         self.dense0 = nn.Dense(units=500, activation='relu')
-        self.dense1 = nn.Dense(units=10,  activation=None)
+        self.dense1 = nn.Dense(units=10, activation=None)
+
     def hybrid_forward(self, F, x):
         x = self.conv0(x)
         x = self.maxp0(x)

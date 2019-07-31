@@ -33,3 +33,4 @@ applications/openpose/
 applications/zhazhafei/
 applications/mobilefacenet/
 libraries/tensorflow/
+.vscode/settings.json
