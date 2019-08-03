@@ -32,6 +32,8 @@ class MNIST(mx.gluon.HybridBlock):
 train_data = mx.gluon.data.vision.MNIST(root='./data', train=True).transform_first(data_xform)
 valid_data = mx.gluon.data.vision.MNIST(root='./data', train=False).transform_first(data_xform)
 
+print(train_data)
+
 batch_size = 32
 train_loader = mx.gluon.data.DataLoader(train_data, shuffle=True, batch_size=batch_size)
 valid_loader = mx.gluon.data.DataLoader(valid_data, shuffle=False, batch_size=batch_size)
