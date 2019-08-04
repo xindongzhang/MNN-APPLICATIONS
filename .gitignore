@@ -1,3 +1,4 @@
+*.pyc
 applications/quantized/images/*
 applications/quantized/models/*
 
