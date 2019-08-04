@@ -51,15 +51,7 @@ class MNIST(nn.Module):
         x = self.relu2(x)
         x = self.conv3(x)
         x = torch.squeeze(x)
-
         return x
-    
-    def num_flat_features(self, x):
-        size = x.size()[1:]  # all dimensions except the batch dimension
-        num_features = 1
-        for s in size:
-            num_features *= s
-        return num_features
 
 
 if __name__ == '__main__':
