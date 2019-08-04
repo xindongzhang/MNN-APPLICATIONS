@@ -11,6 +11,11 @@ applications by MNN,  JNI exec, RK3399. Support tflite and tensorflow model.
 2. BLazeFace介绍：  
 [BlazeFace: 亚毫秒级的人脸检测器](https://zhuanlan.zhihu.com/p/73741766)   
 
+---
+3. MNIST数字识别
+[整合Pytorch和MNN的嵌入式部署流程](https://zhuanlan.zhihu.com/p/76605363)
+[整合mxnet和MNN的嵌入式部署流程](https://zhuanlan.zhihu.com/p/75742333)
+
 
 
 

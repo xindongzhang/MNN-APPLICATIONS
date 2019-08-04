@@ -1,0 +1,2 @@
+Inputs: 0
+Outputs: 32, Type = Squeeze
