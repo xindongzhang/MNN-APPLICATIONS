@@ -16,8 +16,12 @@ applications by MNN,  JNI exec, RK3399. Support tflite and tensorflow model.
 [整合Pytorch和MNN的嵌入式部署流程](https://zhuanlan.zhihu.com/p/76605363)  
 [整合mxnet和MNN的嵌入式部署流程](https://zhuanlan.zhihu.com/p/75742333)
 
-
-
+---
+4. BlazeFace人脸检测:
+[BlazeFace: 亚毫秒级的人脸检测器(含代码)](https://zhuanlan.zhihu.com/p/73741766)
+[基于tensorflow的BlazeFace-lite人脸检测器](https://zhuanlan.zhihu.com/p/79047443)
+[AILab26-tensorflow-models](https://github.com/ailab26/models)
+[tensorflow-BlazeFace-lite的json训练文件]()
 
 
 
