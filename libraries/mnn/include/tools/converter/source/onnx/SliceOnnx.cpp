@@ -45,7 +45,7 @@ void SliceOnnx::run(MNN::OpT* dstOp, const onnx::NodeProto* onnxNode,
     dstOp->main.value  = param;
 }
 
-// REGISTER_CONVERTER(SliceOnnx, Slice);
+REGISTER_CONVERTER(SliceOnnx, Slice);
 
 DECLARE_OP_CONVERTER(SplitOnnx);
 

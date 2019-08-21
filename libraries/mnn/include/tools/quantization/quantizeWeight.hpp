@@ -10,6 +10,8 @@
 #define QUANTIZEWEIGHT_HPP
 #include <stdint.h>
 #include <vector>
+#include <string>
+
 // default: quantize weight every channel
 int SymmetricQuantizeWeight(const float* weight, const int size, int8_t* quantizedWeight, float* scale,
                             const int channels);
@@ -19,10 +21,10 @@ int SymmetricQuantizeWeight(const float* weight, const int size, int8_t* quantiz
 // secondly, divide input_sacle*weight_scale by output_scale
 int QuantizeConvPerChannel(const float* weight, const int size, const float* bias, int8_t* quantizedWeight,
                            int32_t* quantizedBias, float* scale, const std::vector<float>& inputScale,
-                           const std::vector<float>& outputScale);
+                           const std::vector<float>& outputScale, std::string method, bool mergeChannel = true);
 
 int QuantizeDepthwiseConv(const float* weight, const int size, const float* bias, int8_t* quantizedWeight,
                           int32_t* quantizedBias, float* scale, const std::vector<float>& inputScale,
-                          const std::vector<float>& outputScale);
+                          const std::vector<float>& outputScale, std::string method);
 
 #endif // QUANTIZEWEIGHT_HPP

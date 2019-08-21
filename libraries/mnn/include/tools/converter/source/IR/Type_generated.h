@@ -12,15 +12,17 @@ enum NetSource {
   NetSource_CAFFE = 0,
   NetSource_TENSORFLOW = 1,
   NetSource_TFLITE = 2,
+  NetSource_ONNX = 3,
   NetSource_MIN = NetSource_CAFFE,
-  NetSource_MAX = NetSource_TFLITE
+  NetSource_MAX = NetSource_ONNX
 };
 
-inline const NetSource (&EnumValuesNetSource())[3] {
+inline const NetSource (&EnumValuesNetSource())[4] {
   static const NetSource values[] = {
     NetSource_CAFFE,
     NetSource_TENSORFLOW,
-    NetSource_TFLITE
+    NetSource_TFLITE,
+    NetSource_ONNX
   };
   return values;
 }
@@ -30,13 +32,14 @@ inline const char * const *EnumNamesNetSource() {
     "CAFFE",
     "TENSORFLOW",
     "TFLITE",
+    "ONNX",
     nullptr
   };
   return names;
 }
 
 inline const char *EnumNameNetSource(NetSource e) {
-  if (e < NetSource_CAFFE || e > NetSource_TFLITE) return "";
+  if (e < NetSource_CAFFE || e > NetSource_ONNX) return "";
   const size_t index = static_cast<int>(e);
   return EnumNamesNetSource()[index];
 }
@@ -135,6 +138,7 @@ inline const flatbuffers::TypeTable *NetSourceTypeTable() {
   static const flatbuffers::TypeCode type_codes[] = {
     { flatbuffers::ET_CHAR, 0, 0 },
     { flatbuffers::ET_CHAR, 0, 0 },
+    { flatbuffers::ET_CHAR, 0, 0 },
     { flatbuffers::ET_CHAR, 0, 0 }
   };
   static const flatbuffers::TypeFunction type_refs[] = {
@@ -143,10 +147,11 @@ inline const flatbuffers::TypeTable *NetSourceTypeTable() {
   static const char * const names[] = {
     "CAFFE",
     "TENSORFLOW",
-    "TFLITE"
+    "TFLITE",
+    "ONNX"
   };
   static const flatbuffers::TypeTable tt = {
-    flatbuffers::ST_ENUM, 3, type_codes, type_refs, nullptr, names
+    flatbuffers::ST_ENUM, 4, type_codes, type_refs, nullptr, names
   };
   return &tt;
 }
