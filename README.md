@@ -26,5 +26,5 @@ applications by MNN,  JNI exec, RK3399. Support tflite and tensorflow model.
 
 
 交流联系：   
-wechat：zxd675816777
+wechat：zxd675816777  
 AILAB26-公众号：ailab26
