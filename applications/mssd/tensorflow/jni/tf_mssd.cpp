@@ -37,8 +37,8 @@ int main(void)
 {
     std::string image_name = "./nopluz_3.jpg";
     std::string model_name = "./bsd.mnn";
-    // int forward = MNN_FORWARD_CPU;
-    int forward = MNN_FORWARD_OPENCL;
+    int forward = MNN_FORWARD_CPU;
+    // int forward = MNN_FORWARD_OPENCL;
     // int forward = MNN_FORWARD_VULKAN;
 
     int precision = 2;
@@ -46,11 +46,11 @@ int main(void)
     int memory    = 0;
     int threads   = 1;
 
-    int INPUT_SIZE = 300;
-    int OUTPUT_NUM = 1917; // for 300x300
+    //int INPUT_SIZE = 300;
+    //int OUTPUT_NUM = 1917; // for 300x300
 
-    // int INPUT_SIZE = 224;
-    // int OUTPUT_NUM = 1014; // for 224x224
+    int INPUT_SIZE = 224;
+    int OUTPUT_NUM = 1014; // for 224x224
 
     float X_SCALE    = 10.0;
     float Y_SCALE    = 10.0;   
