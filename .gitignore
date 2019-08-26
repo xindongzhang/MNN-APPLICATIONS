@@ -25,6 +25,9 @@ applications/mnist/train/data/*.gz
 applications/mnist/train/*.params
 applications/mnist/train/*.json
 
+applications/pfld-lite/mxnet/libs/*
+applications/pfld-lite/mxnet/obj/*
+
 libraries/mnn/include/tools/converter/build/*
 
 ## not yet
