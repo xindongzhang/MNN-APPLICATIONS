@@ -63,7 +63,7 @@ int main(void)
     net->runSession(session);
 
     // get output data
-    std::string output_tensor_name0 = "conv34_fwd";
+    std::string output_tensor_name0 = "conv5_fwd";
 
     MNN::Tensor *tensor_lmks  = net->getSessionOutput(session, output_tensor_name0.c_str());
 
