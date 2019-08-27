@@ -10,6 +10,7 @@ train_pfld_7.5w.sh 为训练脚本，
 train.py为训练主逻辑代码
 ```
 [基于mxnet设计小型人脸关键点检测器](https://zhuanlan.zhihu.com/p/79701540)  
+[PFLD：一个实用的人脸关键点检测器](https://zhuanlan.zhihu.com/p/73546427)   
 
 交流联系：   
 wechat：zxd675816777  
