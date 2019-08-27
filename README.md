@@ -24,6 +24,7 @@ applications by MNN,  JNI exec, RK3399. Support tflite and tensorflow model.
 [tensorflow-BlazeFace-lite的json训练文件](https://github.com/xindongzhang/MNN-APPLICATIONS/blob/master/applications/blazeface/blazeface_pipeline.config)  
 
 5. 人脸关键点检测:  
+[PFLD-lite：基于MNN和mxnet的嵌入式部署](https://zhuanlan.zhihu.com/p/80051906)   
 [MNN测试代码](https://github.com/xindongzhang/MNN-APPLICATIONS/tree/master/applications/pfld-lite/mxnet/jni)  
 [训练代码](https://github.com/ailab26/pfld-lite)  
 [基于mxnet设计小型人脸关键点检测器](https://zhuanlan.zhihu.com/p/79701540)  
