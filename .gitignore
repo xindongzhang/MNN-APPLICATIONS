@@ -1,4 +1,8 @@
 *.pyc
+*.swp
+*.swo
+*.swn
+
 applications/quantized/images/*
 applications/quantized/models/*
 
