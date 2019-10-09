@@ -20,8 +20,6 @@ applications/yufacedetect/caffe/obj/*
 
 applications/retinaface/caffe/libs/*
 applications/retinaface/caffe/obj/*
-applications/retinaface/caffe/jni/graphs/mnet.caffemodel
-applications/retinaface/caffe/jni/graphs/mnet.prototxt
 
 applications/mnist/onnx/libs/*
 applications/mnist/onnx/obj/*
